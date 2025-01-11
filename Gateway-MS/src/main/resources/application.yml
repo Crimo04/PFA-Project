@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: r1
+          uri: lb://CANDIDAT-MS
+          predicates:
+            - Path=/c/**
+        - id: r2
+          uri: lb://RH-SERVICE
+          predicates:
+            - Path=/r/**
+        - id: r3
+          uri: lb://TECHLEAD-MS
+          predicates:
+            - Path=/t/**
+
+
+
+
+
+
+
+
+
+
+
+

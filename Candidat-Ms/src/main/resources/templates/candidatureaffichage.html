@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .label {
+            font-weight: bold;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Candidat-MS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        </ul>
+    </div>
+</nav>
+<br/><br/><br/>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Application Details</h2>
+                </div>
+                <div class="card-body">
+                    <div th:if="${candidature == null}" class="alert alert-info">
+                        <p>No applications found.</p>
+                    </div>
+
+                    <div th:if="${candidature != null}">
+                        <div class="mb-4">
+                            <h4 class="mb-3">Application Informations</h4>
+                            <div class="row mb-2">
+                                <div class="col-md-4"><span class="label">Statuts :</span></div>
+                                <div class="col-md-8" th:text="${candidature.statut}"></div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-4"><span class="label">Application date:</span></div>
+                                <div class="col-md-8" th:text="${#temporals.format(candidature.dateCandidature, 'dd-MM-yyyy')}"></div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-4"><span class="label">FileName:</span></div>
+                                <div class="col-md-8" th:text="${candidature.fileName}"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="mb-3">Candidate Information</h4>
+                            <div class="row mb-2">
+                                <div class="col-md-4"><span class="label">FullName :</span></div>
+                                <div class="col-md-8" th:text="${candidature.candidat.nom}"></div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-4"><span class="label">Email :</span></div>
+                                <div class="col-md-8" th:text="${candidature.candidat.email}"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <a th:href="@{/candidature/{id}(id=${candidature.candidat.id})}" class="btn btn-outline-secondary">
+            Back to home
+        </a>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
