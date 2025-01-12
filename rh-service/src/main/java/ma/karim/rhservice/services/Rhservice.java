@@ -1,6 +1,7 @@
 package ma.karim.rhservice.services;
 
 
+import ma.karim.rhservice.dto.CandidatDTO;
 import ma.karim.rhservice.dto.CandidatureDTO;
 import ma.karim.rhservice.dto.TechLeadDTO;
 import ma.karim.rhservice.entities.Entretien;
@@ -53,18 +54,39 @@ public class Rhservice {
     }
 
     public List<Entretien> GetEntretienByIDTechLead(Long id){
-        return entretienRepository.findEntretienByTechLeadId(id);
+        List<Entretien> entretiens=  entretienRepository.findEntretienByTechLeadId(id);
+        // Pour chaque entretien, récupérer et définir le TechLead
+        entretiens.forEach(entretien -> {
+            TechLeadDTO techLead = restClientT.getTechLeadByID(id);
+            CandidatureDTO candidat = restClient.CandidatureByID(entretien.getCandidatureId());
+            entretien.setTechLead(techLead);
+            entretien.setCandidat(candidat);
+        });
+
+        return entretiens;
     }
 
     public List<Entretien> GetAllEntretien(){
-        return entretienRepository.findAll();
+         List<Entretien> entretiens = entretienRepository.findAll();
+
+        // Pour chaque entretien, récupérer et définir le TechLead
+        entretiens.forEach(entretien -> {
+            TechLeadDTO techLead = restClientT.getTechLeadByID(entretien.getTechLeadId());
+            CandidatureDTO candidat = restClient.CandidatureByID(entretien.getCandidatureId());
+            entretien.setTechLead(techLead);
+            entretien.setCandidat(candidat);
+        });
+
+        return entretiens;
     }
     public Entretien addEntretien(Entretien entretien) {
         Entretien e = new Entretien();
         e.setTechLeadId(entretien.getTechLeadId());
+        e.setCandidatureId(entretien.getCandidatureId());
         e.setDateEntretien(entretien.getDateEntretien());
         e.setHeureEntretien(entretien.getHeureEntretien());
         e.setTechLead(restClientT.getTechLeadByID(entretien.getTechLeadId()));
+        e.setCandidat(restClient.CandidatureByID(entretien.getCandidatureId()));
         return entretienRepository.save(e);
     }
 }

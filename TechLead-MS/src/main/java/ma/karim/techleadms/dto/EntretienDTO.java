@@ -20,7 +20,11 @@ public class EntretienDTO
 
     private Long id;
 
-    private Long TechLeadid;
+    private Long techLeadId;
+
+
+
+    private Long candidatureId;
 
 
    private LocalDate dateEntretien;
@@ -35,12 +39,12 @@ public class EntretienDTO
         this.id = id;
     }
 
-    public Long getTechLeadid() {
-        return TechLeadid;
+    public Long getTechLeadId() {
+        return techLeadId;
     }
 
-    public void setTechLeadid(Long techLeadid) {
-        TechLeadid = techLeadid;
+    public void setTechLeadId(Long techLeadId) {
+        this.techLeadId = techLeadId;
     }
 
     public LocalDate getDateEntretien() {
@@ -60,4 +64,11 @@ public class EntretienDTO
     }
 
 
+    public Long getCandidatureId() {
+        return candidatureId;
+    }
+
+    public void setCandidatureId(Long candidatureId) {
+        this.candidatureId = candidatureId;
+    }
 }

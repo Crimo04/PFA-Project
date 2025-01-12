@@ -186,5 +186,6 @@ public class AuthController {
     public @ResponseBody List<Candidature> getallvalidatetechleadCandidature() {
         return userService.getAllcandidaturesValidate();
     }
+
 }
 

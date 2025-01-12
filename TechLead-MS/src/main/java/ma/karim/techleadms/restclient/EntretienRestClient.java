@@ -12,5 +12,6 @@ import java.util.List;
 @FeignClient(name = "rh-service", url = "http://localhost:8084")
 public interface EntretienRestClient {
     @GetMapping("RH/techlead/entretien/{id}")
-    public List<EntretienDTO> GetallEntretien(@PathVariable Long id);
+    @ResponseBody
+    public List<EntretienDTO> GetallEntretienByID(@PathVariable Long id);
 }

@@ -1,5 +1,6 @@
 package ma.karim.rhservice.restclient;
 
+import ma.karim.rhservice.dto.CandidatDTO;
 import ma.karim.rhservice.dto.CandidatureDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -24,6 +25,9 @@ public interface CandidatureRestClient {
 
     @GetMapping("/candidature/api/refuse/{id}")
      CandidatureDTO RefuseCandidature(@PathVariable Long id);
+
+
+
 
 
 

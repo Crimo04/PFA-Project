@@ -48,7 +48,7 @@ public class TechLeadservice {
 
     public List<EntretienDTO> GetallEntretien(Long id)
     {
-         return entretienRestClient.GetallEntretien(id);
+         return entretienRestClient.GetallEntretienByID(id);
     }
 
 

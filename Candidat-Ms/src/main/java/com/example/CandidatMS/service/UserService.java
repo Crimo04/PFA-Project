@@ -37,4 +37,6 @@ public interface UserService {
     List<Candidature> getAllcandidaturesValidate ();
 
 
+
+
 }
