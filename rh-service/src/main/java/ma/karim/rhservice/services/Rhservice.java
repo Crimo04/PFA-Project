@@ -60,7 +60,7 @@ public class Rhservice {
             TechLeadDTO techLead = restClientT.getTechLeadByID(id);
             CandidatureDTO candidat = restClient.CandidatureByID(entretien.getCandidatureId());
             entretien.setTechLead(techLead);
-            entretien.setCandidat(candidat);
+            entretien.setCandidature(candidat);
         });
 
         return entretiens;
@@ -74,7 +74,7 @@ public class Rhservice {
             TechLeadDTO techLead = restClientT.getTechLeadByID(entretien.getTechLeadId());
             CandidatureDTO candidat = restClient.CandidatureByID(entretien.getCandidatureId());
             entretien.setTechLead(techLead);
-            entretien.setCandidat(candidat);
+            entretien.setCandidature(candidat);
         });
 
         return entretiens;
@@ -86,7 +86,7 @@ public class Rhservice {
         e.setDateEntretien(entretien.getDateEntretien());
         e.setHeureEntretien(entretien.getHeureEntretien());
         e.setTechLead(restClientT.getTechLeadByID(entretien.getTechLeadId()));
-        e.setCandidat(restClient.CandidatureByID(entretien.getCandidatureId()));
+        e.setCandidature(restClient.CandidatureByID(entretien.getCandidatureId()));
         return entretienRepository.save(e);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    void saveUser(UserDto userDto);
+    UserDto saveUser(UserDto userDto);
 
     User findByEmail(String email);
 
@@ -35,6 +35,8 @@ public interface UserService {
    // Candidature GetCandidatureFinaleValidate (Long id);
 
     List<Candidature> getAllcandidaturesValidate ();
+
+    public List<User> getAllUsers();
 
 
 
