@@ -1,6 +1,5 @@
 package com.example.CandidatMS.service;
 
-import com.example.CandidatMS.dto.CandidatureDTO;
 import com.example.CandidatMS.dto.UserDto;
 import com.example.CandidatMS.entity.Candidature;
 import com.example.CandidatMS.entity.Role;
@@ -9,11 +8,8 @@ import com.example.CandidatMS.enums.Statut;
 import com.example.CandidatMS.repository.CandidatureRepository;
 import com.example.CandidatMS.repository.RoleRepository;
 import com.example.CandidatMS.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
@@ -42,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDto userDto) {
+    public UserDto saveUser(UserDto userDto) {
         User user = new User();
         user.setNom(userDto.getFirstName() + " " + userDto.getLastName());
         user.setEmail(userDto.getEmail());
@@ -55,7 +51,13 @@ public class UserServiceImpl implements UserService {
             role = checkRoleExist();
         }
         user.setRoles(Arrays.asList(role));
-        userRepository.save(user);
+        // Sauvegardez et récupérez l'utilisateur avec son ID généré
+        User savedUser = userRepository.save(user);
+
+        // Mettez à jour le DTO avec l'ID généré
+        userDto.setId(savedUser.getId());
+
+        return userDto;
     }
 
     @Override
@@ -110,6 +112,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Candidature> getAll() {
         return candidatureRepository.findAll();
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override
